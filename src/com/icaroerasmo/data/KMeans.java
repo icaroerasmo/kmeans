@@ -67,13 +67,13 @@ public class KMeans {
 			if(isEqual) {
 				for(int i = 0; i < centroide1.size(); i++) {
 					isEqual &= centroide1.get(i).getIndex() == centroide2.get(i).getIndex();
-					System.out.println(centroide1.get(i).getIndex() + " " + centroide2.get(i).getIndex());
 				}
 			}
 			
 			if(isEqual) {
 				break;
 			}
+			System.out.println();
 		}
 		return isEqual;
 	}
