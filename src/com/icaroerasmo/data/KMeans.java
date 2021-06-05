@@ -100,11 +100,12 @@ public class KMeans {
 	}
 	
 	private Tupla achaMediana(Map<Double, Tupla> distancias) {
-		var index = distancias.size() / 2;
+		var index = (((double)distancias.size()) / 2);
 		var nextIndex = index+1;
 		var keys = (Double[]) distancias.keySet().toArray(new Double[distancias.size()]);
-		var indexTupla = keys.length % 2 == 0 ? ((Double)(keys[index] + keys[nextIndex])/2) : index;
-		return distancias.get(keys[(int)Math.round(indexTupla)]);
+		var valorTupla = keys.length % 2 == 0 ? ((Double)(keys[(int) Math.round(index)] + keys[(int)Math.round(nextIndex)])/2) : keys[(int)Math.round(index)];
+		var keyFound = distancias.keySet().stream().filter(d -> d >= ((int)Math.round(valorTupla))).findFirst().get();
+		return distancias.get(keyFound);
 	}
 	
 	private void instanciaGrupos() {
@@ -117,11 +118,6 @@ public class KMeans {
 		var diff = 0D;
 		
 		for(Integer coluna : t1.getIndexes()) {
-			
-			if(coluna.equals(database.getColunaRotulo())) {
-				continue;
-			}
-			
 			diff += distanciaAttr(t1.getAsDouble(coluna), t2.getAsDouble(coluna));
 		}
 		
